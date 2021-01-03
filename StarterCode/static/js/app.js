@@ -1,6 +1,6 @@
 // Pulling data from json file and adding them with filter
 function pullMetadata(sample) {
-    d3.json('/metadata/${sample}').then((data) => {
+    d3.json('data/samples.json').then((data) => {
         // var metadata= data.metadata[0];
         var PANEL= d3.select('#sample-metadata');
         // var samplesArray = metadata.filter()
@@ -8,10 +8,8 @@ function pullMetadata(sample) {
         // ary.filter => return a list (use [0])
         Object.entries(data).forEach(([key, value]) => {
             PANEL.append("h6").text(`${key}: ${value}`);
-        })
-        //Gauge Chart
-        buildGauge(data.wFREQ);
-    })
+        });
+    });
 }
 
 function buildCharts(sampleData, otuData) {
@@ -33,8 +31,7 @@ function buildCharts(sampleData, otuData) {
             color: sampleData[0]['otu_ids'], 
             colorscale: 'Earth'
         }
-    }
-    ];
+    }];
 
     Plotly.plot('bubble', bubbleData, bubbleLayout);
 
@@ -50,12 +47,15 @@ function buildCharts(sampleData, otuData) {
         title:'Top 10 Bacteria Cultures Found',
         margin: {t: 30, l: 150}
     };
+
     Plotly.newPlot('bar', barChartData, barLayout);
-    
+
+}    
+
 function init() {
     var selector= d3.select('#selDataset');
 
-    d3.json('samples.json').then((data) => {
+    d3.json('data/samples.json').then((data) => {
         var sampleNames = data.names;
         sampleNames.forEach((sample)=>{
             selector
@@ -74,8 +74,11 @@ function dataChange(newSample) {
     buildCharts(newSample);
     pullMetadata(newSample);
 }
+
 init();
-}
+
+
+
 
 
 
