@@ -51,8 +51,8 @@ function buildCharts(sample) {
 
 
         }];
+        Plotly.plot('bubble', bubbleData, bubbleLayout);
     });
-    Plotly.plot('bubble', bubbleData, bubbleLayout);
 }
 
     // var y_value= sampleData['sample_values'];
