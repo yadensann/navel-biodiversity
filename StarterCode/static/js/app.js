@@ -1,63 +1,107 @@
 // Pulling data from json file and adding them with filter
 
-d3.json('./data/samples.json', function(data) {
-    console.log(data)
-});
+// d3.json('/data', function(data) {
+//     console.log(data)
+// });
+var sampleData;
 
+d3.json('/data').then(response => {
+    sampleData= response;
+    var x_value= ['otu_ids'];
+    console.log(x_value);
+    console.log(sampleData);
+    var PANEL= d3.select('#sample-metadata');
+    // console.log(PANEL);
+        PANEL.html("");
+        Object.entries(response).forEach(([key, value]) => {
+            PANEL.append("p").text(`${key}: ${value}`);
+            console.log([key, value]);
+        })
+
+    });
+
+// console.log(sampleData);
+
+
+function buildCharts(sample) {
+    d3.json('/data').then((response) => {
+        var samples= response.samples;
+        var samplesArray= samples.filter(sampleobject => sampleobject.id == sample);
+        var result= samplesArray[0];
+
+        var ids= result.otu_ids;
+        var labels= result.otu_labels;
+        var values= result.sample_values;
+
+        var bubbleLayout= {
+            margin: {t: 0},
+            hovermode:'closest',
+            xaxis: {title:'OTU IDs'}
+            };
+        var bubbleData= [{
+            x: ids,
+            y: values,
+            text: labels,
+            mode: 'markers',
+            marker: {
+                size: values,
+                color: ids, 
+                colorscale: 'Earth'
+            }
+
+
+        }];
+    });
+    Plotly.plot('bubble', bubbleData, bubbleLayout);
+}
+
+    // var y_value= sampleData['sample_values'];
 
 // function pullMetadata(sample) {
-//     d3.json('./data/samples.json').then((response) => {
-//         console.log(response);
+//     d3.json('/data').then((response) => {
+//         var metadata= response.metadata;
+//         var resultsArray= metadata.filter(sampleobject => sampleobject.id == sample);
+//         var result= resultsArray[0]
+        
 
-//     // d3.json('./data/samples.json').then((data) => {
-//         var data= response;
-//         var PANEL= d3.select('#sample-metadata');
-//         // var samplesArray = metadata.filter()
-//         PANEL.html("");
-//         // ary.filter => return a list (use [0])
-//         Object.entries(data).forEach(([key, value]) => {
-//             PANEL.append("p").text(`${key}: ${value}`);
-//         });
+
+// var x_value= sampleData['otu_ids'];
+// var size_value=sampleData['sample_values'];
+// var labels = sampleData['otu_labels'];
+
+// // console.log(labels);
+
+
+
+//         console.log(x_value);
+        // var y_value= sampleData['sample_values'];
+        // var size_value=sampleData['sample_values'];
+        // var labels = sampleData['otu_labels'];
+
+        // console.log(labels);
+
 //     });
 // }
 
-// function buildCharts(sample) {
-//     d3.json('./data/samples.json').then((response => {
-//         var xValue= response['otu_ids'];
-//         var yValue= response['sample_values'];
-//         var sizeValue=response['sample_values'];
-//         var label = response['otu_labels'];
-
-//         // var samples= data.samples;
-//         // var samplesArray= samples.filter(sampleObject => sampleObject.id == samples);
-//         // var result= samplesArray[0];
+// // //     }))
+// // //     // var labels= sampleData[0]['otu_ids'].map(function(item){
+// // //     //     return otuData[item]
+// // //     };
 
 
-//     }));
+        // var trace1= {
+        //     x: x_value,
+        //     y: y_value,
+        //     mode:'markers',
+        //     marker:{
+        //         size: sizeValue,
+        //         color: xValue,
+        //         colorscale: 'Earth',
+        //         labels: label,
+        //         type: 'scatter',
 
-
-//         // var ids= result.otu_ids;
-//         // var labels= result.otu_labels;
-//         // var values= result.sample_values;
-// //     }))
-// //     // var labels= sampleData[0]['otu_ids'].map(function(item){
-// //     //     return otuData[item]
-// //     };
-
-
-//         var trace1= {
-//             x: xValue,
-//             y: yValue,
-//             mode:'markers',
-//             marker:{
-//                 size: sizeValue,
-//                 color: xValue,
-//                 colorscale: 'Earth',
-//                 labels: label,
-//                 type: 'scatter',
-
-//             }
-//         };
+        //     }
+        // };
 
 //         var data1= [trace1];
 
@@ -67,21 +111,8 @@ d3.json('./data/samples.json', function(data) {
 //             showlegend: true
 //         };
 //         Plotly.newPlot('bubble', data1, layout);
-    // var bubbleLayout= {
-    //     margin: {t: 0},
-    //     hovermode:'closest',
-    //     xaxis: {title:'OTU ID'}
-    // };
-    // var bubbleData= [{
-    //     x: ids,
-    //     y: values,
-    //     text: labels,
-    //     mode: 'markers',
-    //     marker: {
-    //         size: values,
-    //         color: ids, 
-    //         colorscale: 'Earth'
-    //     }
+
+
     // }];
 
 //     Plotly.plot('bubble', bubbleData, bubbleLayout);
