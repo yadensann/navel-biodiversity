@@ -1,59 +1,88 @@
 // Pulling data from json file and adding them with filter
 
 d3.json('./data/samples.json', function(data) {
-    console.log(data);
+    console.log(data)
 });
 
-function pullMetadata(sample) {
-    d3.json('./data/samples.json').then((response) => {
-        console.log(response);
 
-    // d3.json('./data/samples.json').then((data) => {
-        var data= response;
-        var PANEL= d3.select('#sample-metadata');
-        // var samplesArray = metadata.filter()
-        PANEL.html("");
-        // ary.filter => return a list (use [0])
-        Object.entries(data).forEach(([key, value]) => {
-            PANEL.append("p").text(`${key}: ${value}`);
-        });
-    });
-}
+// function pullMetadata(sample) {
+//     d3.json('./data/samples.json').then((response) => {
+//         console.log(response);
 
-function buildCharts(sample) {
-    d3.json('./data/samples.json').then((response => {
-        var xValue= response['']
-        var samples= data.samples;
-        var samplesArray= samples.filter(sampleObject => sampleObject.id == samples);
-        var result= samplesArray[0];
+//     // d3.json('./data/samples.json').then((data) => {
+//         var data= response;
+//         var PANEL= d3.select('#sample-metadata');
+//         // var samplesArray = metadata.filter()
+//         PANEL.html("");
+//         // ary.filter => return a list (use [0])
+//         Object.entries(data).forEach(([key, value]) => {
+//             PANEL.append("p").text(`${key}: ${value}`);
+//         });
+//     });
+// }
+
+// function buildCharts(sample) {
+//     d3.json('./data/samples.json').then((response => {
+//         var xValue= response['otu_ids'];
+//         var yValue= response['sample_values'];
+//         var sizeValue=response['sample_values'];
+//         var label = response['otu_labels'];
+
+//         // var samples= data.samples;
+//         // var samplesArray= samples.filter(sampleObject => sampleObject.id == samples);
+//         // var result= samplesArray[0];
 
 
-    }));
+//     }));
 
 
-        var ids= result.otu_ids;
-        var labels= result.otu_labels;
-        var values= result.sample_values;
-//     }))
-//     // var labels= sampleData[0]['otu_ids'].map(function(item){
-//     //     return otuData[item]
-//     };
-//     var bubbleLayout= {
-//         margin: {t: 0},
-//         hovermode:'closest',
-//         xaxis: {title:'OTU ID'}
-//     };
-//     var bubbleData= [{
-//         x: ids,
-//         y: values,
-//         text: labels,
-//         mode: 'markers',
-//         marker: {
-//             size: values,
-//             color: ids, 
-//             colorscale: 'Earth'
-//         }
-//     }];
+//         // var ids= result.otu_ids;
+//         // var labels= result.otu_labels;
+//         // var values= result.sample_values;
+// //     }))
+// //     // var labels= sampleData[0]['otu_ids'].map(function(item){
+// //     //     return otuData[item]
+// //     };
+
+
+//         var trace1= {
+//             x: xValue,
+//             y: yValue,
+//             mode:'markers',
+//             marker:{
+//                 size: sizeValue,
+//                 color: xValue,
+//                 colorscale: 'Earth',
+//                 labels: label,
+//                 type: 'scatter',
+
+//             }
+//         };
+
+//         var data1= [trace1];
+
+//         var layout= {
+//             title:'Marker Size',
+//             xaxis: { title: 'OTU ID'},
+//             showlegend: true
+//         };
+//         Plotly.newPlot('bubble', data1, layout);
+    // var bubbleLayout= {
+    //     margin: {t: 0},
+    //     hovermode:'closest',
+    //     xaxis: {title:'OTU ID'}
+    // };
+    // var bubbleData= [{
+    //     x: ids,
+    //     y: values,
+    //     text: labels,
+    //     mode: 'markers',
+    //     marker: {
+    //         size: values,
+    //         color: ids, 
+    //         colorscale: 'Earth'
+    //     }
+    // }];
 
 //     Plotly.plot('bubble', bubbleData, bubbleLayout);
 
@@ -96,7 +125,7 @@ function buildCharts(sample) {
 //         buildCharts(firstSample);
 //         pullMetadata(firstSample);
 //     });
-}
+
 
 //     d3.json('./data/samples.json').then((data) => {
 //         var sampleNames = data.names;
