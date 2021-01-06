@@ -18,62 +18,48 @@ var sampleData;
             Object.entries(response).forEach(([key, value]) => {
                 PANEL.append("p").text(`${key}: ${value}`);
                 console.log([key, value]);
-
             })
     
         });
-
-
-
-// console.log(sampleData);
-// var y_value= sampleData['sample_values'];
-// var size_value=sampleData['sample_values'];
+    
 
 var bubbleSamples = []
     // function buildCharts(sample) {
 var url= `/data`;
-    d3.json(url).then((response) => {
+    d3.json(url).then(response => {
         console.log(response);
-        var bubbleData= JSON.parse(response);  
-        console.log(bubbleData);
-        // const obj= JSON.parse(bubbleJSON);
-        // console.log(obj.samples, obj.otu_ids);
-        // var bubbleSamples= response;
-        // var bubbleSampleObj = JSON.parse(bubbleSamples);
-        // console.log(bubbleSampleObj.samples, bubbleSampleObj.otu_ids);
-        
-        // const x_value= 
+        var bubbleSamples= response;
+        console.log(bubbleSamples);
 
-        // console.log(x_value);
+        var ids= bubbleSamples.samples;
+        var otu_ids= ids[1];
+        console.log(otu_ids);
 
+        // console.log(ids);
 
-        });
+        // var labels= result.otu_labels;
+        // var values= result.sample_values;
+    });
 
-
-        var ids= response['otu_ids'];
-        var labels= result.otu_labels;
-        var values= result.sample_values;
-
-        var bubbleLayout= {
-            margin: {t: 0},
-            hovermode:'closest',
-            xaxis: {title:'OTU IDs'}
-            };
-        var bubbleData= [{
-            x: ids,
-            y: values,
-            text: labels,
-            mode: 'markers',
-            marker: {
-                size: values,
-                color: ids, 
-                colorscale: 'Earth'
-            }
-
-
-        }];
-        Plotly.plot('bubble', bubbleData, bubbleLayout);
+    //     var bubbleLayout= {
+    //         margin: {t: 0},
+    //         hovermode:'closest',
+    //         xaxis: {title:'OTU IDs'}
+    //         };
+    //     var bubbleData= [{
+    //         x: ids,
+    //         y: values,
+    //         text: labels,
+    //         mode: 'markers',
+    //         marker: {
+    //             size: values,
+    //             color: ids, 
+    //             colorscale: 'Earth'
+    //         }
+    //     }];
     
+    //     Plotly.plot('bubble', bubbleData, bubbleLayout);
+    // });
 
 
     // var y_value= sampleData['sample_values'];
