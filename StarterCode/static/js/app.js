@@ -4,32 +4,53 @@
 //     console.log(data)
 // });
 var sampleData;
+// function pullMetadata(sample){
+    d3.json('/data').then((response) => {
+        sampleData= response;
+        console.log(sampleData);
+        // var samplesArray= sampleData.filter(sampleobject => sampleobject.id == sample);
+        // var result= samplesArray[0];
+        // console.log(result);
 
-d3.json('/data').then(response => {
-    sampleData= response;
-    var x_value= ['otu_ids'];
-    console.log(x_value);
-    console.log(sampleData);
-    var PANEL= d3.select('#sample-metadata');
-    // console.log(PANEL);
-        PANEL.html("");
-        Object.entries(response).forEach(([key, value]) => {
-            PANEL.append("p").text(`${key}: ${value}`);
-            console.log([key, value]);
-        })
+        var PANEL= d3.select('#sample-metadata');
+            console.log(PANEL);
+            PANEL.html("");
+            Object.entries(response).forEach(([key, value]) => {
+                PANEL.append("p").text(`${key}: ${value}`);
+                console.log([key, value]);
 
-    });
+            })
+    
+        });
+
+
 
 // console.log(sampleData);
+// var y_value= sampleData['sample_values'];
+// var size_value=sampleData['sample_values'];
+
+var bubbleSamples = []
+    // function buildCharts(sample) {
+var url= `/data`;
+    d3.json(url).then((response) => {
+        console.log(response);
+        var bubbleData= JSON.parse(response);  
+        console.log(bubbleData);
+        // const obj= JSON.parse(bubbleJSON);
+        // console.log(obj.samples, obj.otu_ids);
+        // var bubbleSamples= response;
+        // var bubbleSampleObj = JSON.parse(bubbleSamples);
+        // console.log(bubbleSampleObj.samples, bubbleSampleObj.otu_ids);
+        
+        // const x_value= 
+
+        // console.log(x_value);
 
 
-function buildCharts(sample) {
-    d3.json('/data').then((response) => {
-        var samples= response.samples;
-        var samplesArray= samples.filter(sampleobject => sampleobject.id == sample);
-        var result= samplesArray[0];
+        });
 
-        var ids= result.otu_ids;
+
+        var ids= response['otu_ids'];
         var labels= result.otu_labels;
         var values= result.sample_values;
 
@@ -52,8 +73,8 @@ function buildCharts(sample) {
 
         }];
         Plotly.plot('bubble', bubbleData, bubbleLayout);
-    });
-}
+    
+
 
     // var y_value= sampleData['sample_values'];
 
@@ -65,8 +86,7 @@ function buildCharts(sample) {
         
 
 
-// var x_value= sampleData['otu_ids'];
-// var size_value=sampleData['sample_values'];
+
 // var labels = sampleData['otu_labels'];
 
 // // console.log(labels);
@@ -74,8 +94,7 @@ function buildCharts(sample) {
 
 
 //         console.log(x_value);
-        // var y_value= sampleData['sample_values'];
-        // var size_value=sampleData['sample_values'];
+
         // var labels = sampleData['otu_labels'];
 
         // console.log(labels);
