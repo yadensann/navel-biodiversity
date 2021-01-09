@@ -24,3 +24,5 @@
 ## Bonus
 - Created a gauge chart from https://plot.ly/javascript/gauge-charts/ to plot the weekly washing frequency of the individual.
 
+## Github Pages link
+https://yadensann.github.io/templates/index.html
