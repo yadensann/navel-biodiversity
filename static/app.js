@@ -92,7 +92,7 @@ function optionChanged(selectedID){
         yaxis: {title: 'Number of Samples Collected'},
         showlegend: false,
         height: 800,
-        width: 1500
+        width: 1300
         };
 
         // plot bubble chart
