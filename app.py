@@ -28,7 +28,7 @@ def index():
     return render_template('index.html', title= 'page')
 @app.route('/data')
 def data():
-    data= json.load(open('./static/js/samples.json'))
+    data= json.load(open('static/samples.json'))
     return jsonify(data)
 
 if __name__ == "__main__":
