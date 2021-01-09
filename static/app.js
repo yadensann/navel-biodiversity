@@ -8,7 +8,8 @@ var sampleData;
 // function pullMetadata(sample){
     d3.json('/data').then((response) => {
         sampleData= response;
-        var metadata=response['metadata']
+        var metadata=response['metadata'];
+        console.log(metadata)
         var just_one=metadata.filter(one=>one['id']==parseInt(default_id))[0]
         console.log(just_one);
         // var samplesArray= sampleData.filter(sampleobject => sampleobject.id == sample);
@@ -23,20 +24,21 @@ var sampleData;
                 console.log([key, value]);
             });
     });  
+      
     // function buildCharts(sample) {
         var url= `/data`;
         d3.json(url).then(response => {
             //console.log(response);
-            var samples=response['samples']
-            var just_one=samples.filter(one=>one.id=default_id)[0]
-            console.log(just_one);
-            var bubbleSamples= response;
-            //console.log(bubbleSamples);
+            var just_samples=response['samples'];
+            var xval= just_samples[];
+            var yval= just_samples.sample_values;
 
-            var ids= bubbleSamples.samples
-            //console.log(ids)
-            // for(var ids in json) {
+            // var just_otu_ids=just_samples.filter(only=>only['otu_ids']);
+            console.log(just_samples);
+            // console.log(just_otu_ids);
+            console.log(xval);
 
+            // var trace={}
             });
             // console.log(Object.keys(otu_ids));
 
